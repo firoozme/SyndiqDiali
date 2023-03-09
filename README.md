@@ -74,6 +74,10 @@ After setting Database information You Can import "syndiqdiali.sql" in downloade
 
 ## Run
 ```bash
+php artisan key:generate
+```
+
+```bash
  php artisan serve
 ```
 
