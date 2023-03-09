@@ -43,7 +43,7 @@ npm run dev
 
 
 ## Setting
- open ".env" file in root Set following settings:
+ find ".env.example" file in project's root then rename that to ".env". open it and Set following settings:
 
  Database Information:
  ```bash
