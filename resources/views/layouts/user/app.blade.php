@@ -30,6 +30,11 @@
     @livewireStyles
     <style>
         [x-cloak] { display: none !important; }
+        ::placeholder {
+                 
+                 /* Firefox, Chrome, Opera */
+                 text-align: left;
+             }
     </style>
     @yield('styles')
 </head>

@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('syndicates', function (Blueprint $table) {
             $table->id();
             $table->string('name',100);
+            $table->string('syndicate_name_arabic',100);
+            $table->date('syndicate_creation_date');
+            $table->date('syndicate_starting_date');
             $table->softDeletes();
             $table->timestamps();
         });

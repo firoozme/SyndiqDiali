@@ -10,11 +10,14 @@ use Illuminate\Validation\Rule;
 class Edit extends Component
 {
     public $residents;
-    public $syndicate, $name;
+    public $syndicate, $name, $arabic_name, $creation_date, $starting_date;
     public function mount($id)
     {
         $this->syndicate = Syndicate::findOrFail($id);
         $this->name = $this->syndicate->name;
+        $this->arabic_name = $this->syndicate->syndicate_name_arabic;
+        $this->creation_date = $this->syndicate->syndicate_creation_date;
+        $this->starting_date = $this->syndicate->syndicate_starting_date;
     }
     public function render()
     {
@@ -25,6 +28,9 @@ class Edit extends Component
          // Validate
          $validatedSyndicate = $this->validate([
             'name' => ['required', Rule::unique('syndicates')->whereNull('deleted_at')->ignore($this->syndicate->id)],
+            'arabic_name' => ['required'],
+            'creation_date' => ['required', 'date'],
+            'starting_date' => ['required', 'date'],
         ]);
 
         
@@ -32,6 +38,10 @@ class Edit extends Component
             //code...
             $this->syndicate->update([
                 'name'=>$this->name,
+                'syndicate_name_arabic' => $this->arabic_name,
+                'syndicate_creation_date' => $this->creation_date,
+                'syndicate_starting_date' => $this->starting_date,
+                
             ]);
             $this->emit('sweet',[
                 'title'=> 'Success!',

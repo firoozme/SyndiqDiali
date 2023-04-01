@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 class Create extends Component
 {
     public $residents;
-    public $name;
+    public $name, $arabic_name, $creation_date, $starting_date;
     public function mount()
     {
         $this->residents = Resident::all();
@@ -26,12 +26,18 @@ class Create extends Component
         // Validate
         $validatedSyndicate = $this->validate([
             'name' => ['required',Rule::unique('syndicates')->whereNull('deleted_at')],
+            'arabic_name' => ['required'],
+            'creation_date' => ['required', 'date'],
+            'starting_date' => ['required', 'date'],
         ]);
 
         try {
           
             Syndicate::create([
                 'name' => $this->name,
+                'syndicate_name_arabic' => $this->arabic_name,
+                'syndicate_creation_date' => $this->creation_date,
+                'syndicate_starting_date' => $this->starting_date,
             ]);
     
              // Sweet Alert

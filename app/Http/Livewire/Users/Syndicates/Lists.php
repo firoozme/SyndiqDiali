@@ -36,7 +36,10 @@ class Lists extends DataTableComponent
             Column::make("Name", "name")
                 ->searchable()
                 ->sortable(),
-            Column::make("Create at", "created_at")
+            Column::make("Creation at", "syndicate_creation_date")
+                ->searchable()
+                ->sortable(),
+            Column::make("Starting at", "syndicate_starting_date")
                 ->searchable()
                 ->sortable(),
            
