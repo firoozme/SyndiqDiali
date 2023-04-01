@@ -51,6 +51,17 @@ class Lists extends DataTableComponent
                 })
                 ->buttons([
  
+                    LinkColumn::make('Contract') // make() has no effect in this case but needs to be set anyway
+                        ->title(fn($row) => '')
+                        ->location(fn($row) => route('user.syndicate.contract',['syndicate_id'=>$row->id]))
+                        ->attributes(function($row) {
+                            return [
+                                'class' => 'btn btn-sm btn-outline-success far fa-file-contract',
+                                'data-toggle' => 'tooltip',
+                                'data-placement' => 'top',
+                                'data-original-title' => 'Contract',
+                            ];
+                        }),
                     LinkColumn::make('Fee') // make() has no effect in this case but needs to be set anyway
                         ->title(fn($row) => '')
                         ->location(fn($row) => route('user.syndicate.fees',['syndicate_id'=>$row->id]))

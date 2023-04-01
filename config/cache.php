@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('CACHE_DRIVER', 'file'),
+    'default' => env('CACHE_DRIVER', 'none'),
 
     /*
     |--------------------------------------------------------------------------
@@ -32,7 +32,9 @@ return [
     */
 
     'stores' => [
-
+        'none' => [
+            'driver' => 'null',
+        ],
         'apc' => [
             'driver' => 'apc',
         ],

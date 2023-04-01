@@ -13,6 +13,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Livewire\Users\Auth\Forget;
 use App\Http\Controllers\User\UserController;
 
+use App\Http\Livewire\Users\Contracts\Index as ContractIndex;
 use App\Http\Livewire\Users\Fees\Index as FeeIndex;
 use App\Http\Livewire\Users\Log\Index as LogIndex;
 use App\Http\Livewire\Users\Users\Index as UserIndex;
@@ -39,6 +40,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/test',[TestController::class, 'pdf'])->name('test');
 Route::middleware(['auth'])->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
 });
@@ -63,6 +65,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('/syndicate/{syndicate_id}/residents/{type?}/{id?}', ResidentIndex::class)->name('syndicate.residents'); 
         Route::get('/syndicate/{syndicate_id}/documents/{type?}/{id?}', DocumentIndex::class)->name('syndicate.documents');
         Route::get('/syndicate/{syndicate_id}/fees/{type?}/{id?}', FeeIndex::class)->name('syndicate.fees');
+        Route::get('/syndicate/{syndicate_id}/contracts', [ContractIndex::class,'pdf'])->name('syndicate.contract');
 
         // Bank Accounts
         Route::get('/accounts/{type?}/{id?}', AccountIndex::class)->name('accounts');
