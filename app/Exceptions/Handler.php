@@ -2,11 +2,15 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\Traits\apiTrait;
 use Throwable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
+    use apiTrait;
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -46,5 +50,17 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ModelNotFoundException) {
+            return $this->responseStatus( 'Not Found!', '', $status = 'error', 404);
+
+        }elseif($exception instanceof MethodNotAllowedHttpException){
+            return $this->responseStatus( $exception->getMessage(), '', $status = 'error', 400);
+        }
+
+        return parent::render($request, $exception);
     }
 }

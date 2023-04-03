@@ -15,6 +15,7 @@ class Syndicate extends Model
     use HasFactory;
     use SoftDeletes;
 
+
     protected $guarded = [];
 
     public function residents()
@@ -29,6 +30,15 @@ class Syndicate extends Model
     public function vicepresident()
     {
         return $this->belongsTo(Resident::class,'vice_president_id','id');
+    }
+
+    public function fees()
+    {
+        return $this->hasMany(Fee::class);
+    }
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 
     public static function boot() {

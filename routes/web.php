@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Livewire\Testt;
 use App\Http\Livewire\UserTable;
 use Illuminate\Support\Facades\Route;
 
